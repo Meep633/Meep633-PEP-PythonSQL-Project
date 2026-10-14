@@ -1,7 +1,6 @@
 import csv
 import os
 import sqlite3
-import pandas as pd
 
 # Resolve the resources folder relative to this file, so paths work
 # no matter what directory the script is run from.
@@ -54,8 +53,10 @@ def main():
 
 # This function will load the users.csv file into the users table, discarding any records with incomplete data
 def load_and_clean_users(file_path):
-    users_df = pd.read_csv(file_path, on_bad_lines="skip")
-    print(users_df)
+    with open(file_path, newline="") as csv_file:
+        reader = csv.reader(csv_file)
+        headers = next(reader)
+        
 
 
 # This function will load the callLogs.csv file into the callLogs table, discarding any records with incomplete data
