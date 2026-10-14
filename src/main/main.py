@@ -59,9 +59,10 @@ def load_and_clean_users(file_path):
         for row in reader:
             if len(row) != len(headers):
                 continue
-            print(row)
-            fname = row[0]
-            lname = row[1]
+            fname = row[0].strip()
+            lname = row[1].strip()
+            if fname == "" or lname == "":
+                continue 
             cursor.execute(f"INSERT INTO users (firstName, lastName) VALUES ('{fname}', '{lname}')")
 
 
