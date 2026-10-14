@@ -59,7 +59,7 @@ def load_and_clean_users(file_path):
         for row in reader:
             if len(row) != len(headers):
                 continue
-            row = map(strip, row)
+            row = map(str.strip, row)
             if "" in row:
                 continue 
             cursor.execute(f"INSERT INTO users (firstName, lastName) VALUES ('{row[0]}', '{row[1]}')")
