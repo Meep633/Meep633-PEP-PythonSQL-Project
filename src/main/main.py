@@ -59,11 +59,10 @@ def load_and_clean_users(file_path):
         for row in reader:
             if len(row) != len(headers):
                 continue
-            fname = row[0].strip()
-            lname = row[1].strip()
-            if fname == "" or lname == "":
+            row = map(strip, row)
+            if "" in row:
                 continue 
-            cursor.execute(f"INSERT INTO users (firstName, lastName) VALUES ('{fname}', '{lname}')")
+            cursor.execute(f"INSERT INTO users (firstName, lastName) VALUES ('{row[0]}', '{row[1]}')")
 
 
 # This function will load the callLogs.csv file into the callLogs table, discarding any records with incomplete data
